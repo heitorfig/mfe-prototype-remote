@@ -2,9 +2,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require("path");
-const { dependencies } = require("./package.json");
+const { dependencies, version } = require("./package.json");
 
-module.exports = {
+const exportDev = {
   entry: "./src/index",
   mode: "development",
   devServer: {
@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: "Remote",
-      filename: "moduleEntry.js",
+      filename: `moduleEntry.js`,
       exposes: {
         "./App": "./src/App",
         "./Button": "./src/Button",
@@ -57,4 +57,17 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   target: "web",
-};
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+  }
+}
+
+const exportDevVersioned = {
+  ...exportDev,
+  output: {
+    ...exportDev.output,
+    path: path.resolve(__dirname, `dist/${version}`),
+  }
+}
+
+module.exports = [exportDev, exportDevVersioned];

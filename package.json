@@ -1,6 +1,6 @@
 {
   "name": "mfe-prototype-remote",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "homepage": "https://heitorfig.github.io/mfe-prototype-remote",
   "dependencies": {
@@ -16,7 +16,7 @@
     "start": "webpack serve",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
